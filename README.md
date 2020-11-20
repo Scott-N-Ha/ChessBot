@@ -2,8 +2,7 @@
 A simple DIscord Bot for me to mess around with
 
 ## Dependancies
-- Winston
-- Discord.io
+- Discord.js
 
 ## Running The Bot
 ```npm start```
