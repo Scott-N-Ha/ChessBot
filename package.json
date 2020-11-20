@@ -1,0 +1,15 @@
+{
+  "name": "chessbot",
+  "version": "1.0.0",
+  "description": "A Simple Discord ChessBot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.io": "^2.5.3",
+    "winston": "^3.3.3"
+  }
+}
