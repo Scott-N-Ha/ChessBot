@@ -22,7 +22,7 @@ client.once('ready', () => {
 client.login(token);
 
 // listen for messages
-client.on('message', ({
+client.on('message', async ({
   channel,
   deleted,
   id,
@@ -47,14 +47,19 @@ client.on('message', ({
   reference
 }) => {
 
-  if (channel.name === 'chess' && content === '!stats') {
-    // channel.send(`Pong! Bitch! ${author.username}`)
+  if (channel.name === 'chess' && content[0] === '!') {
+    const [command, name] = content.split(' ');
+    let resp;
 
-    try {
-      const stats = cAPI.getPlayerStats('LordBootie');
-      channel.send(`Stats for LordBootie: ${stats}`);
-    } catch (error) {
-      channel.send(`Error fetching stats ${error}`);
+    switch (command) {
+      case '!stats':
+        resp = await cAPI.getPlayerStats(name);
+        break;
+      default:
+        resp = 'Command not recognized';
+        break;
     }
+
+    channel.send(resp);
   }
 });
