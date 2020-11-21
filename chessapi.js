@@ -45,18 +45,20 @@ class Chess {
       const body = resp.body;
 
       resp = `**${name}**
-      `;
+        `;
 
       Object.keys(body).forEach((type) => {
-        let formatType;
+        let formatType = '__**';
 
         switch(type) {
-          case 'chess960_daily': formatType = '960 Daily'; break;
-          case 'chess_daily': formatType = 'Daily'; break;
-          case 'chess_rapid': formatType = 'Rapid'; break;
-          case 'chess_bullet': formatType = 'Bullet'; break;
-          case 'chess_blitz': formatType = 'Blitz'; break;
+          case 'chess960_daily': formatType += '960 Daily'; break;
+          case 'chess_daily': formatType += 'Daily'; break;
+          case 'chess_rapid': formatType += 'Rapid'; break;
+          case 'chess_bullet': formatType += 'Bullet'; break;
+          case 'chess_blitz': formatType += 'Blitz'; break;
         }
+
+        formatType += '**__';
 
         console.log('body', body)
         if (body[type] && (type !== 'fide' && type !== 'lessons' && type !== 'tactics' && type !== 'puzzle_rush')) {

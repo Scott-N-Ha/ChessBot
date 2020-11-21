@@ -46,20 +46,25 @@ client.on('message', async ({
   flags,
   reference
 }) => {
-
-  if (channel.name === 'chess' && content[0] === '!') {
-    const [command, name] = content.split(' ');
-    let resp;
-
-    switch (command) {
-      case '!stats':
-        resp = await cAPI.getPlayerStats(name);
-        break;
-      default:
-        resp = 'Command not recognized';
-        break;
+  if (author.username !== 'ChessBot') {
+    if (channel.name === 'chess' && content[0] === '!') {
+      const [command, name] = content.split(' ');
+      let resp;
+  
+      switch (command) {
+        case '!stats':
+          if (name) {
+            resp = await cAPI.getPlayerStats(name);
+          } else {
+            resp = 'Please enter a name (*!stats **name***)';
+          }
+          break;
+        default:
+          resp = `${command} not recognized.`;
+          break;
+      }
+  
+      channel.send(resp);
     }
-
-    channel.send(resp);
   }
 });
