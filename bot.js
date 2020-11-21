@@ -1,6 +1,8 @@
 // require the discord.js module
 const Discord = require('discord.js');
-const ChessWebAPI = require('chess-web-api');
+const ChessAPI = require('./chessapi.js');
+
+const cAPI = new ChessAPI();
 
 const {
   token
@@ -18,9 +20,6 @@ client.once('ready', () => {
 
 // login to Discord with your app's token
 client.login(token);
-
-// instantiate chesswebapi
-const chessAPI = new ChessWebAPI();
 
 // listen for messages
 client.on('message', ({
@@ -52,23 +51,10 @@ client.on('message', ({
     // channel.send(`Pong! Bitch! ${author.username}`)
 
     try {
-      const stats = getPlayerStats('LordBootie');
-      console.log(stats)
+      const stats = cAPI.getPlayerStats('LordBootie');
       channel.send(`Stats for LordBootie: ${stats}`);
     } catch (error) {
       channel.send(`Error fetching stats ${error}`);
     }
   }
 });
-
-async function getPlayerStats (name) {
-  let resp;
-
-  try {
-    resp = await chessAPI.getPlayer(name);
-  } catch (error) {
-    resp = error;
-  }
-  
-  return resp;
-}
